@@ -11,6 +11,8 @@
   "license": "BSD",
   "dependencies": {
     "jade": "~1.1.5",
-    "express": "~3.4.8"
+    "express": "~3.4.8",
+    "stylus": "~0.42.2",
+    "mongoose": "~3.8.7"
   }
 }

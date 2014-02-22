@@ -1,0 +1,16 @@
+{
+  "name": "PluralsightMean",
+  "version": "0.0.0",
+  "description": "Kegbot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Justin Rassier",
+  "license": "BSD",
+  "dependencies": {
+    "jade": "~1.1.5",
+    "express": "~3.4.8"
+  }
+}

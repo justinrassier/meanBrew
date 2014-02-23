@@ -13,7 +13,7 @@ function compile(str, path){
 }
 
 app.configure(function(){
-    //set the server views folder
+    //set the server views folder. I believe call to render will automatically point heres
 	app.set('views', __dirname+ '/server/views');
 
     //set jade as view engine
@@ -22,7 +22,7 @@ app.configure(function(){
     //express routing
     app.use(express.logger('dev'));
 
-    //express body parser -- parse the body of the documents that are
+    //express body parser -- not 100% sure what this is for
     app.use(express.bodyParser());
 
     //setup stylus compiler for CSS
@@ -55,10 +55,10 @@ Message.findOne().exec(function(err, messageDoc){
 
 //render out jade partials
 app.get('/partials/:partialPath', function(req,res){
-
     res.render('partials/' + req.params.partialPath);
 });
 
+//catch-all route to serve up the index
 app.get('*', function(req, res){
 res.render('index', {
     mongoMessage: mongoMessage

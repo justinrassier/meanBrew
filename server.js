@@ -2,12 +2,12 @@ var express = require('express'),
     stylus = require('stylus'),
     mongoose = require('mongoose');
 
-//gets node environment
+//gets node environment if available, if not, set it ot dev
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var app = express();
 
-//setup stylus
+//setup stylus compiler
 function compile(str, path){
     return stylus(str).set('filename', path);
 }
@@ -37,7 +37,8 @@ app.configure(function(){
     app.use(express.static(__dirname + '/public'));
 });
 
-mongoose.connect('mongodb://localhost/kegbot');
+//connect mongoose to MongoDB
+mongoose.connect('mongodb://localhost/basicMean');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function callback() {
@@ -66,6 +67,7 @@ res.render('index', {
 
 });
 
+//startup the express web server on port 3030
 var port = 3030;
 app.listen(port);
 

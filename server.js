@@ -44,6 +44,7 @@ db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function callback() {
    console.log('kegbot db opened');
 });
+//define a sechema and get the Hello MONGO message to send to the view
 var messageSchema = mongoose.Schema({message: String});
 var Message = mongoose.model('Message', messageSchema);
 var mongoMessage;

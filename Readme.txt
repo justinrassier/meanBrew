@@ -9,7 +9,7 @@ This is the basic MEAN setup from the PluralSight course. It uses the following 
 To install and run
 - Install Node and npm and make sure it is added to your PATH (installer usually takes care of this)
 - Install MongoDB and have it running
-    -> Startup the MongoDB shell and type:
+    -> Startup the MongoDB shell and type the following to get a DB and insert a message:
     -> use basicMean
     -> db.messages.insert({"message": "Hello MONGO!"});
 - Install git (required for bower, it uses git to retrieve the files)

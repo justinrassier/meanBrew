@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-    "engines" : {
-        "node": "0.10.x",
-        "npm" : "1.2.x"
-    },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
   "repository": "",
   "author": "Justin Rassier",
   "license": "BSD",
@@ -17,6 +17,8 @@
     "jade": "~1.1.5",
     "express": "~3.4.8",
     "stylus": "~0.42.2",
-    "mongoose": "~3.8.7"
+    "mongoose": "~3.8.7",
+    "passport": "~0.2.0",
+    "passport-local": "~0.1.6"
   }
 }

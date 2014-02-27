@@ -1,71 +1,53 @@
 var express = require('express'),
-    stylus = require('stylus'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
 
 //gets node environment if available, if not, set it ot dev
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
 var app = express();
+var config = require('./server/config/config')[env];
 
-//setup stylus compiler
-function compile(str, path){
-    return stylus(str).set('filename', path);
-}
+require('./server/config/express')(app,config);
+require('./server/config/mongoose')(config);
 
-app.configure(function(){
-    //set the server views folder. I believe call to render will automatically point heres
-	app.set('views', __dirname+ '/server/views');
 
-    //set jade as view engine
-	app.set('view engine', 'jade');
-
-    //express routing
-    app.use(express.logger('dev'));
-
-    //express body parser -- not 100% sure what this is for
-    app.use(express.bodyParser());
-
-    //setup stylus compiler for CSS
-    app.use(stylus.middleware(
-        {
-            src: __dirname+ '/public',
-            compile: compile
+//passport local authentication.
+var User = mongoose.model('User');
+passport.use(new LocalStrategy(
+    function(username, password, done){
+        //verify username and password are correct and pass to done callback
+        User.findOne({username: username}).exec(function(err,user){
+            if(user){
+                return done(null,user); //I think done goes to what calls authenticate (i.e. called from our route)
+            }
+            else{
+                return done(null,false);
+            }
+        });
+    }
+));
+//need to tell passport how to serialize and deserialize a user
+passport.serializeUser(function(user,done){
+    if(user){
+        done(null,user._id);
+    }
+});
+passport.deserializeUser(function(id,done){
+    User.findOne({_id:id}).exec(function(err,user){
+        if(user){
+            return done(null,user);
         }
-    ));
-
-    //setup static route to the public folder for static content
-    app.use(express.static(__dirname + '/public'));
-});
-
-//connect mongoose to MongoDB
-if(env === 'development'){
-    mongoose.connect('mongodb://localhost/basicMean');
-}else{
-    mongoose.connect('mongodb://justinrassier:V4LknrMGaipw7Ba@ds033059.mongolab.com:33059/basicmean');
-}
-
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', function callback() {
-   console.log('kegbot db opened');
+        else{
+            return done(null, false);
+        }
+    });
 });
 
 
 
-//render out jade partials
-app.get('/partials/*', function(req,res){
-    res.render('../../public/app/' + req.params);
-});
+require('./server/config/routes')(app);
 
-//catch-all route to serve up the index
-app.get('*', function(req, res){
-res.render('index');
-
-});
-
-//startup the express web server on port 3030
-var port = process.env.PORT  || 3030;
-app.listen(port);
-
-console.log("listening on port "+ port + '...');
+//startup the express web server on port defined in config
+app.listen(config.port);
+console.log("listening on port "+ config.port + '...');

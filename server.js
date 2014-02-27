@@ -38,38 +38,34 @@ app.configure(function(){
 });
 
 //connect mongoose to MongoDB
-mongoose.connect('mongodb://localhost/basicMean');
+if(env === 'development'){
+    mongoose.connect('mongodb://localhost/basicMean');
+}else{
+    mongoose.connect('mongodb://justinrassier:V4LknrMGaipw7Ba@ds033059.mongolab.com:33059/basicmean');
+}
+
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function callback() {
    console.log('kegbot db opened');
 });
-//define a sechema and get the Hello MONGO message to send to the view
-var messageSchema = mongoose.Schema({message: String});
-var Message = mongoose.model('Message', messageSchema);
-var mongoMessage;
-Message.findOne().exec(function(err, messageDoc){
-    mongoMessage = messageDoc.message;
-
-});
 
 
 
 //render out jade partials
-app.get('/partials/:partialPath', function(req,res){
-    res.render('partials/' + req.params.partialPath);
+app.get('/partials/*', function(req,res){
+    res.render('../../public/app/' + req.params);
 });
 
 //catch-all route to serve up the index
 app.get('*', function(req, res){
-res.render('index', {
-    mongoMessage: mongoMessage
-});
+res.render('index');
 
 });
 
 //startup the express web server on port 3030
-var port = 3030;
+var port = process.env.PORT  || 3030;
 app.listen(port);
 
 console.log("listening on port "+ port + '...');

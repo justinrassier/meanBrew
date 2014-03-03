@@ -1,4 +1,4 @@
-var passport = require('passport');
+var auth = require('./auth');
 
 module.exports = function(app){
 
@@ -7,26 +7,25 @@ module.exports = function(app){
         res.render('../../public/app/' + req.params);
     });
 
-    app.post('/login',function(req, res, next){
-        //call authenticate that takes the strategy name (local) and a callback.
-        //This is called from the stuff we setup in the server.js that authenticates the user
-        var auth = passport.authenticate('local',function(err,user){
-            if (err) {return next(err);}
-            if(!user){return res.send({success:false})};
 
-            req.logIn(user, function(err){
-                if(err){return next(err);}
-                res.send({success:true, user: user});
-            })
-        });
+    //TODO: Don't send full user object to client! Right now hashed passwords go up the wire
+    app.post('/login',auth.authenticate);
 
-        auth(req,res,next);
+    app.post('/logout', function(req,res){
+        console.log('signing out');
+        //request has a logout method that was attached by the passport module
+        req.logout();
+        res.end();
 
     });
 
     //catch-all route to serve up the index
     app.get('*', function(req, res){
-        res.render('index');
+        //send up the current user with every request to the index page. Jade looks for this
+        // and then stringifies and attaches it to the browser window dom object for use
+        res.render('index', {
+            bootstrappedUser: req.user
+        });
 
     });
 

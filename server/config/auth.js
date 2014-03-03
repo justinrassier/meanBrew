@@ -13,4 +13,28 @@ exports.authenticate = function(req, res, next){
         })
     });
     auth(req,res,next);
-}
+};
+
+//middleware for API routes to check if authenticated
+exports.requiresApiLogin = function(req,res,next){
+    if(!req.isAuthenticated()){
+        res.status(403);
+        res.end();
+    }
+    else{
+        next();
+    }
+};
+
+exports.requiresRole = function(role){
+    //express needs a function to be returned to use as middlware
+    return function(req,res,next){
+        if(!req.isAuthenticated || req.user.roles.indexOf(role) === -1){
+            res.status(403);
+            res.end();
+        }
+        else{
+            next();
+        }
+    }
+};

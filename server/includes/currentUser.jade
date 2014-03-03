@@ -1,0 +1,5 @@
+//name of variable created by our template and is only available on the server at the time it interprets
+// the jade file and shoves it into a window object
+if !!bootstrappedUser
+    script.
+        window.bootstrappedUserObject = !{JSON.stringify(bootstrappedUser)}

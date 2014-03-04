@@ -30,11 +30,15 @@ angular.module('app').run(function($rootScope, $location){
     });
 });
 
-app.controller('browseRecipe', function($scope){
+app.controller('RecipeCtrl', function($scope){
     $scope.recipes = [
         {name:'IPA'},
         {name:'Stout'},
         {name:'Porter'},
         {name:'Etc'}
     ];
+
+    $scope.testing = function(){
+        return "blah";
+    };
 });

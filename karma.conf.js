@@ -16,8 +16,10 @@ module.exports = function(config) {
     files: [
       'public/vendor/angular/angular.js',
       'public/vendor/angular-resource/angular-resource.js',
+      'public/vendor/angular-route/angular-route.js',
       'public/vendor/angular-mocks/angular-mocks.js',
-      'test/test-app.js',
+      'public/vendor/toastr/toastr.js',
+      'public/app/app.js',
       'public/app/**/*.js',
       'test/tests/**/*.js'
     ],
@@ -25,7 +27,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      'public/app/app.js'
+      //'public/app/app.js'
     ],
 
 

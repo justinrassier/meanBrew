@@ -1,15 +1,24 @@
-var app = angular.module('app');
 
 describe('Our app', function(){
-    it('should load', function(){
-        expect(app.name).toBe('app');
+//    var app;
+
+    beforeEach(function(){
+        console.log('beforeBlah');
+        module('app')
     });
 
-    describe('The recipe controller', function(){
-        var ctrl;
+//    it('should load', function(){
+//        expect(app.name).toBe('app');
+//    });
 
-        beforeEach(inject(function($controller){
-            ctrl = $controller('RecipeCtrl');
+    describe('The recipe controller', function(){
+        var ctrl,
+            scope;
+
+        beforeEach(inject(function(){
+            console.log('blah');
+//            scope = $rootScope.$new();
+//            ctrl = $controller('RecipeCtrl', {$scope:scope});
         }));
 
         it('exists', function(){
@@ -17,3 +26,4 @@ describe('Our app', function(){
         });
     });
 });
+

@@ -10,6 +10,7 @@ module.exports = function(config) {
             'public/*.js',
             'public/vendor/angular/angular.min.js',
             'public/vendor/angular-resource/angular-resource.min.js',
+            'public/vendor/angular-mocks/angular-mocks.js',
             'public/vendor/angular-route/angular-route.min.js',
             'public/vendor/bootstrap/dist/js/bootsrap.min.js',
             'public/vendor/toastr/toastr.min.js',

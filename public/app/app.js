@@ -37,4 +37,8 @@ app.controller('browseRecipe', function($scope){
         {name:'Porter'},
         {name:'Etc'}
     ];
+
+    $scope.testing = function(){
+        return "blah";
+    };
 });

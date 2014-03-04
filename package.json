@@ -22,9 +22,6 @@
     "passport-local": "~0.1.6"
   },
   "devDependencies": {
-    "karma-mocha": "~0.1.1",
-    "mocha": "~1.17.1",
-    "karma-chai-plugins": "~0.2.0",
     "karma-script-launcher": "~0.1.0",
     "karma-chrome-launcher": "~0.1.2",
     "karma-firefox-launcher": "~0.1.3",

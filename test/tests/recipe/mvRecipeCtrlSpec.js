@@ -6,9 +6,8 @@ describe('mvRecipeCtrl', function(){
             var scope = $rootScope.$new(),
                 ctrl = $controller('browseRecipe', {$scope: scope});
 
+                expect(scope.recipes.length).toBe(4);
 
-
-            expect(scope.recipes).to.exist;
         }));
 
     });

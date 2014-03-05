@@ -1,15 +1,13 @@
 var auth = require('./auth'),
+    users = require('../controllers/users/users'),
     mongoose = require('mongoose'),
     User = mongoose.model('User');
 
 module.exports = function(app){
 
     //some api routes. Use the middleware we created in auth.js to check if authenticated
-    app.get('/api/users', auth.requiresRole('admin'), function(req,res){
-        User.find({}).exec(function(err,collection){
-            res.send(collection);
-        });
-    });
+    app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
+    app.post('/api/users', users.createUser)
 
     //render out jade partials
     app.get('/partials/*', function(req,res){

@@ -1,6 +1,9 @@
 var passport= require('passport');
 
 exports.authenticate = function(req, res, next){
+    //make login case insensitive 
+    req.body.username = req.body.username.toLowerCase();
+
     //call authenticate that takes the strategy name (local) and a callback.
     //This is called from the stuff we setup in the server.js that authenticates the user
     var auth = passport.authenticate('local',function(err,user){

@@ -7,7 +7,8 @@ module.exports = function(app){
 
     //some api routes. Use the middleware we created in auth.js to check if authenticated
     app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
-    app.post('/api/users', users.createUser)
+    app.post('/api/users', users.createUser);
+    app.put('/api/users', users.updateUser);
 
     //render out jade partials
     app.get('/partials/*', function(req,res){

@@ -7,7 +7,7 @@ angular.module('app').factory('mvNotifier', function(mvToastr){
             mvToastr.success(msg);
         },
         error: function(msg){
-            mvToaster.error(msg);
+            mvToastr.error(msg);
         }
     }
 

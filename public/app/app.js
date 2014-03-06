@@ -25,6 +25,9 @@ app.config(function($routeProvider, $locationProvider){
         .when('/profile', {templateUrl: '/partials/account/profile',
             controller: 'mvProfileCtrl', resolve:routeRoleChecks.user
         })
+        .when('/courses', {templateUrl: '/partials/courses/course-list',
+            controller: 'mvCourseListCtrl'
+        })
 });
 
 //call run so that this runs after the code above is configured

@@ -1,0 +1,10 @@
+html {
+  font-size: 125%;
+}
+html,
+body {
+  line-height: 1.6;
+}
+/**
+ * Based upon http://lamb.cc/typograph/
+ */

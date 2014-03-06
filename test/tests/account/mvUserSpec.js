@@ -5,13 +5,14 @@ describe('mvUser', function(){
         it('should return false if the roles array does not have an admin entry', inject(function(mvUser){
             var user = new mvUser();
             user.roles = ["not admin"];
-            expect(user.isAdmin()).toBe.false;
+            expect(user.isAdmin()).toBeFalsy();
+
         }));
 
         it('should return true if the role array has an admin entry', inject(function(mvUser){
             var user = new mvUser();
             user.roles = ['admin'];
-            expect(user.isAdmin()).toBe.true;
+            expect(user.isAdmin()).toBeTruthy();
         }));
     });
 })

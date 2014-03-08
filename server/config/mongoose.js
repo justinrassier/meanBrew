@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    recipeModel = require('../models/Recipe'), //need this here to register the Recipe model with mongoose for the user schema
     userModel = require('../models/User');
 
 module.exports = function(config){

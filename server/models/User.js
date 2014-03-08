@@ -28,10 +28,4 @@ userSchema.methods ={
 var User  = mongoose.model('User', userSchema);
 
 
-seeder = require('../config/seed');
-function createDefaultUsers(){
-    seeder.seedUsers();
-}
 
-
-exports.createDefaultUsers = createDefaultUsers;

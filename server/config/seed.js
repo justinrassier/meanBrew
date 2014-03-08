@@ -17,9 +17,9 @@ exports.seedUsers = function () {
 
         justin.save(function(err){ if(!err){console.log('user saved')}});
 
-        //matt with a referenced recipes2 collection
-        //var matt = createUser('mrmattrichards@gmail.com', 'matt','Matt', 'Richards', ['admin']);
-        //matt.save(function(err){});
+
+        var matt = createUser('mrmattrichards@gmail.com', 'matt','Matt', 'Richards', ['admin']);
+        matt.save(function(err){});
 
 
     })

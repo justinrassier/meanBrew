@@ -7,14 +7,14 @@ describe('mvRecipeCtrl', function(){
 
         it('Should Contain 4 Routes', inject(function($rootScope,$controller){
                  scope = $rootScope.$new();
-                 ctrl = $controller('browseRecipe', {$scope: scope});
+                 ctrl = $controller('mvRecipeCtrl', {$scope: scope});
 
                 expect(scope.recipes.length).toBe(4);
         }));
 
         it('Should contains a route of "IPA" as the first route', inject(function($rootScope, $controller){
                 scope = $rootScope.$new();
-                ctrl = $controller('browseRecipe', {$scope: scope});
+                ctrl = $controller('mvRecipeCtrl', {$scope: scope});
 
             expect(scope.recipes[0].name).toBe('IPA');
         }));

@@ -14,6 +14,8 @@
                 | {{identity.currentUser.firstName + " " + identity.currentUser.lastName}}
                 b.caret
             ul.dropdown-menu
+                li
+                    a(href="/recipe") My Recipes
                 li(ng-show="identity.currentUser.isAdmin()")
                     a(href="/admin/users") User Admin
                 li

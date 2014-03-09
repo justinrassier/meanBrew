@@ -1,9 +1,10 @@
-//
-   Created by Cepster on 2/27/14.
-ul
-    li(ng-repeat="recipe in recipes")
-        {{recipe.name}}
-
+.container
+    .well
+        h3 My Recipes
+        .row
+            .col-md-3(ng-repeat="recipe in recipes")
+                a(href="#") {{recipe.name}} - {{recipe.style}}
+                div recipe details
 
 
 

@@ -4,7 +4,13 @@ describe('mvRecipeCtrl', function(){
     describe('The Controller',function(){
         var scope,
             ctrl;
+        it('Should exist', inject(function($rootScope, $controller){
+            scope = $rootScope.$new();
+            ctrl = $controller('mvRecipeCtrl', {$scope: scope});
 
+            expect($controller).not.toBeNull($controller);
+
+        }));
         it('Should Contain 4 Routes', inject(function($rootScope,$controller){
                  scope = $rootScope.$new();
                  ctrl = $controller('mvRecipeCtrl', {$scope: scope});

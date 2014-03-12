@@ -1,5 +1,7 @@
 var mongoose = require('mongoose'),
-    userModel = require('../models/User');
+    recipeModel = require('../models/Recipe'), //need this here to register the mongoose models in order
+    userModel = require('../models/User'),
+    seeder = require('./seed');
 
 module.exports = function(config){
 
@@ -12,6 +14,6 @@ module.exports = function(config){
         console.log('db opened');
     });
 
-    userModel.createDefaultUsers();
+    seeder.seedUsers();
 }
 

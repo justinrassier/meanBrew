@@ -1,0 +1,23 @@
+//2 different ways to view the information for now
+.container
+    .well
+        h3 My Recipes
+        .row
+            .col-md-3(ng-repeat="recipe in myRecipes")
+                a(href="/recipe/{{recipe._id}}") {{recipe.name}} - {{recipe.style}}
+                div recipe details
+
+.container
+    h3 My Recipes
+    .row
+        .panel.panel-default.col-md-3(ng-repeat="recipe in myRecipes")
+            .panel-heading
+                a(href="/recipe/{{recipe._id}}") {{recipe.name}}
+            .panel-body
+                ul
+                    li Style: {{recipe.style}}
+                    li {{recipe.description}}
+
+
+
+

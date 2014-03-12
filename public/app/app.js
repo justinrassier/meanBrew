@@ -15,7 +15,10 @@ app.config(function($routeProvider, $locationProvider){
     $locationProvider.html5Mode(true);
     $routeProvider
         .when('/', {templateUrl: '/partials/main/main', controller: 'mvMainCtrl'})
-        .when('/recipe', {templateUrl: '/partials/recipe/browseRecipes', controller: 'browseRecipe'})
+        .when('/recipe', {templateUrl: '/partials/recipe/myRecipes',
+            controller: 'mvRecipeCtrl', resolve: routeRoleChecks.user})
+        .when('/recipe/:id', {templateUrl: '/partials/recipe/recipeDetails',
+            controller: 'mvRecipeDetailCtrl', resolve: routeRoleChecks.user})
         .when('/admin/users', {templateUrl: '/partials/admin/user-list',
             controller: 'mvUserListCtrl', resolve: routeRoleChecks.admin
         })
@@ -38,11 +41,3 @@ angular.module('app').run(function($rootScope, $location){
     });
 });
 
-app.controller('browseRecipe', function($scope){
-    $scope.recipes = [
-        {name:'IPA'},
-        {name:'Stout'},
-        {name:'Porter'},
-        {name:'Etc'}
-    ];
-});

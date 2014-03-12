@@ -14,5 +14,22 @@ describe('mvUser', function(){
             user.roles = ['admin'];
             expect(user.isAdmin()).toBeTruthy();
         }));
+
+
     });
+
+    describe('Resource Query', function(){
+        beforeEach(inject(function($resource, $httpBackend){
+
+        }));
+        it('Should return a single user based on ID', inject(function($httpBackend, mvUser){
+            $httpBackend.expectGET('/api/users/1').respond([{firstName: "Justin"}]);
+            var result = mvUser.query({_id: 1});
+            $httpBackend.flush();
+
+
+            expect(result.length).toNotBe(0);
+            expect(result[0].firstName).toEqual('Justin');
+        }))
+    })
 })

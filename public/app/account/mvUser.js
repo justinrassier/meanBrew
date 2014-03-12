@@ -1,7 +1,7 @@
 //create a user resource
 angular.module('app').factory('mvUser', function ($resource) {
 
-    var UserResource = $resource('/api/users/:id', {_id: "@id"},{
+    var UserResource = $resource('/api/users/:_id', {_id: "@_id"},{
         update: {method: 'PUT', isArray:false }
     });
 

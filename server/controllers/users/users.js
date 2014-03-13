@@ -1,9 +1,14 @@
 var User = require('mongoose').model('User'),
-    encrypt = require('../../utilities/encryption');
+    encrypt = require('../../utilities/encryption'),
+    UserViewModel = require('../../viewModels/UserViewModel').UserViewModel;
 
 exports.getUsers = function(req,res){
     User.find({}).exec(function(err,collection){
-        res.send(collection);
+        var userCollection = [];
+        for(var i = 0; i < collection.length; i++){
+            userCollection.push(new UserViewModel(collection[i]));
+        }
+        res.send(userCollection);
     })
 };
 
@@ -24,7 +29,7 @@ exports.createUser = function(req,res, next){
         }
         req.logIn(user, function(err){
             if(err){return next(err);}
-            res.send(user);
+            res.send(new UserViewModel(user));
         })
     });
 

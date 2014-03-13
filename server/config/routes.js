@@ -16,7 +16,7 @@ module.exports = function(app){
     });
 
 
-    //TODO: Don't send full user object to client! Right now hashed passwords go up the wire
+
     app.post('/login',auth.authenticate);
 
     app.post('/logout', function(req,res){

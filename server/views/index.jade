@@ -4,15 +4,24 @@ block main-content
     .navbar.navbar-inverse.navbar-fixed-top
         .container
             .navbar-header
-                a.navbar-brand(href="/") MEAN HOME
-                    h6 -A MEAN Example
+                a.navbar-brand(href="/") MEAN Brew
             .navbar-collapse.collapse
                 ul.nav.navbar-nav
                     li
-                        a(href="/") MEAN HOMES
+                        a(href="/") MEAN Brew Home
+                    li
+                        a(href="/") Browse Recipes
+                    li.dropdown
+                        a.dropdown-toggle(href="", data-toggle="dropdown") Brew-day Tools
+                            b.caret
+                        ul.dropdown-menu
+                            li
+                                a(href="/") Strike Water/Temp Calculator
+                            li
+                                a(href="/") Boil-off Calculator
+
                 div(ng-include="'/partials/account/navbar-login'")
     section.content
         div(ng-view)
 
     footer.container.text-center
-        p &copy; 2014 Justin Rassier

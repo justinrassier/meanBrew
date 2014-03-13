@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    UserViewModel = require('../viewModels/UserViewModel').UserViewModel;
 
 
 module.exports = function(){
@@ -31,7 +32,7 @@ module.exports = function(){
     passport.deserializeUser(function(id,done){
         User.findOne({_id:id}).exec(function(err,user){
             if(user){
-                return done(null,user);
+                return done(null, new UserViewModel(user));
             }
             else{
                 return done(null, false);

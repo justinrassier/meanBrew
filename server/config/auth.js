@@ -1,4 +1,5 @@
-var passport= require('passport');
+var passport= require('passport'),
+    UserViewModel = require('../viewModels/UserViewModel').UserViewModel;
 
 exports.authenticate = function(req, res, next){
     //make login case insensitive 
@@ -12,7 +13,7 @@ exports.authenticate = function(req, res, next){
 
         req.logIn(user, function(err){
             if(err){return next(err);}
-            res.send({success:true, user: user});
+            res.send({success:true, user: new UserViewModel(user)});
         })
     });
     auth(req,res,next);

@@ -1,7 +1,8 @@
 var auth = require('./auth'),
     users = require('../controllers/users/users'),
     mongoose = require('mongoose'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    UserViewModel = require('../viewModels/UserViewModel').UserViewModel;
 
 module.exports = function(app){
 
@@ -31,8 +32,12 @@ module.exports = function(app){
     app.get('*', function(req, res){
         //send up the current user with every request to the index page. Jade looks for this
         // and then stringifies and attaches it to the browser window dom object for use
+        var model;
+        if(req.user){
+            model  = new UserViewModel(req.user);
+        }
         res.render('index', {
-            bootstrappedUser: req.user
+            bootstrappedUser: model
         });
 
     });

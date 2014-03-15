@@ -1,5 +1,9 @@
 var Recipe = require('mongoose').model('Recipe');
 
+exports.getRecipe = function(req,res,next){
+    var recipeId = req.params._id;
+}
+
 exports.createRecipeForUser = function(req,res, next){
     var recipeData = req.body;
     console.log(recipeData);

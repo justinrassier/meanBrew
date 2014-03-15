@@ -1,9 +1,9 @@
-angular.module('app').controller('mvRecipeDetailCtrl', function(mvRecipe, $routeParams){
+angular.module('app').controller('mvRecipeDetailCtrl', function(mvRecipe, $routeParams, mvNotifier){
     //go to the server to get the recipe, this will be ready then when we stop sending the whole user graph up
-    mvRecipe.query({_id: $routeParams._id}).$promise.then(function(){
-        console.log(mvRecipe)
-    },function(){
-
+    mvRecipe.query({_id: $routeParams._id}).$promise.then(function(recipeCollection){
+        var returnedRecipe = recipeCollection[0];
+    },function(reason){
+        mvNotifier.error(reason.data);
     })
 });
 

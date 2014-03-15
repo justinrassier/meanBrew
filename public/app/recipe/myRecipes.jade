@@ -5,7 +5,7 @@
         .row
             .col-md-3(ng-repeat="recipe in myRecipes")
                 a(href="/recipe/{{recipe._id}}") {{recipe.name}} - {{recipe.style}}
-                div recipe details
+                div {{recipe.description}}
 .container
     a.btn.btn-primary(href="/recipe/create")
         i.fa.fa-plus-circle  New Recipe

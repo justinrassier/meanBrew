@@ -8,7 +8,7 @@ angular.module('app').controller('mvCreateRecipeCtrl',function($scope, mvRecipe,
         }
         var newRecipe = new mvRecipe(newRecipeData);
         newRecipe.$save().then(function(){
-            mvNotifier('Recipe created successfully!');
+            mvNotifier.notify('Recipe created successfully!');
         }, function(response){
             console.log(response);
         })

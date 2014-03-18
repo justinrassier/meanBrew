@@ -20,6 +20,14 @@ function findUserByRecipeId(recipeId, callback){
 };
 
 
+exports.getAllRecipesForUser = function(req,res,next){
+    var currentUser = req.user;
+    User.findOne({_id : currentUser._id}, {recipes:1},function(err, results){
+        if(err){return res.send(400, err.toString());}
+        res.send(results.recipes);
+    });
+};
+
 exports.getRecipeById = function(req,res,next){
     var recipeId = req.params._id;
     //find the user with the given recipe. Mongo can't project a sub document from an array from what it sounds like

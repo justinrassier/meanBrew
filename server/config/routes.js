@@ -14,6 +14,7 @@ module.exports = function(app){
 
 
     //Recipe API
+    app.get('/api/recipe', recipes.getAllRecipesForUser);
     app.get('/api/recipe/:_id', recipes.getRecipeById);
     app.post('/api/recipe',  recipes.createRecipeForUser);
     app.put('/api/recipe', recipes.updateRecipe)

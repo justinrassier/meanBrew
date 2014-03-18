@@ -8,9 +8,12 @@ angular.module('app').controller('mvRecipeDetailCtrl', function($scope,mvRecipe,
     $scope.updateRecipe = function(){
         //the recipe comes back from the query above as a resource, so we can just call our update
         $scope.recipe.$update().then(function(recipe){
+
             mvNotifier.notify('Recipe Updated');
             $location.path('/recipe');
-        }, function(){})
+        }, function(reason){
+            mvNotifier.error(reason.data);
+        })
     };
 
 });

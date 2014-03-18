@@ -2,21 +2,14 @@ var Recipe = require('mongoose').model('Recipe'),
     User = require('mongoose').model('User');
 
 function findRecipeById(recipeId, callback){
-    User.findOne({recipes: {$elemMatch: {_id: recipeId}}},function(err,user){
-        if(err || !user){
+    User.findOne({recipes: {$elemMatch: {_id: recipeId}}},{recipes: {$elemMatch: {_id: recipeId}}},function(err,user){
+        if(err || !user || user.recipes.length === 0){
             //should do something better with this error
             return callback(null);
         }
         else{
-            for(var i = 0; i < user.recipes.length; i++){
-                //need == as it needs type coercion to match the _id I guess
-                if(user.recipes[i]._id == recipeId){
-                    console.log('found the recipe');
-                    //angular expects an array back
-                    return callback(user.recipes[i]);
-                }
-            }
-            return callback(null);
+            console.log(user.recipes[0]);
+            return callback(user.recipes[0]);
         }
     });
 };

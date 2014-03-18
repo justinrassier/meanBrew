@@ -18,12 +18,12 @@ app.config(function($routeProvider, $locationProvider){
 
         .when('/recipe', {templateUrl: '/partials/recipe/myRecipes',
             controller: 'mvRecipeCtrl', resolve: routeRoleChecks.user})
+            
+        .when('/recipe/create',{templateUrl: '/partials/recipe/createRecipe',
+            controller: 'mvCreateRecipeCtrl', resolve: routeRoleChecks.user})
 
         .when('/recipe/:_id', {templateUrl: '/partials/recipe/recipeDetail',
             controller: 'mvRecipeDetailCtrl', resolve: routeRoleChecks.user})
-
-        .when('/recipe/create',{templateUrl: '/partials/recipe/createRecipe',
-            controller: 'mvCreateRecipeCtrl', resolve: routeRoleChecks.user})
 
         .when('/admin/users', {templateUrl: '/partials/admin/user-list',
             controller: 'mvUserListCtrl', resolve: routeRoleChecks.admin

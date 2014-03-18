@@ -4,7 +4,6 @@ UserViewModel = function(User){
     this.firstName = User.firstName;
     this.lastName =  User.lastName;
     this.username = User.username;
-    this.recipes = User.recipes;
     this.roles = User.roles;
 };
 

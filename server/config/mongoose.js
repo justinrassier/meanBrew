@@ -15,5 +15,5 @@ module.exports = function(config){
     });
 
     seeder.seedUsers();
-}
+};
 

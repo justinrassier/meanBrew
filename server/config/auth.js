@@ -9,12 +9,12 @@ exports.authenticate = function(req, res, next){
     //This is called from the stuff we setup in the server.js that authenticates the user
     var auth = passport.authenticate('local',function(err,user){
         if (err) {return next(err);}
-        if(!user){return res.send({success:false})};
+        if(!user){return res.send({success:false})}
 
         req.logIn(user, function(err){
             if(err){return next(err);}
             res.send({success:true, user: new UserViewModel(user)});
-        })
+        });
     });
     auth(req,res,next);
 };
@@ -40,5 +40,5 @@ exports.requiresRole = function(role){
         else{
             next();
         }
-    }
+    };
 };

@@ -1,5 +1,5 @@
 
-UserViewModel = function(User){
+var UserViewModel = function(User){
     this._id = User._id;
     this.firstName = User.firstName;
     this.lastName =  User.lastName;

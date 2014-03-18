@@ -13,7 +13,7 @@ angular.module('app').controller('mvRecipeDetailCtrl', function($scope,mvRecipe,
             $location.path('/recipe');
         }, function(reason){
             mvNotifier.error(reason.data);
-        })
+        });
     };
 
 });

@@ -38,4 +38,4 @@ module.exports = function (app, config) {
         //setup static route to the public folder for static content
         app.use(express.static(config.rootPath + '/public'));
     });
-}
+};

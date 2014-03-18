@@ -33,7 +33,7 @@ app.config(function($routeProvider, $locationProvider){
         })
         .when('/profile', {templateUrl: '/partials/account/profile',
             controller: 'mvProfileCtrl', resolve:routeRoleChecks.user
-        })
+        });
 });
 
 //call run so that this runs after the code above is configured

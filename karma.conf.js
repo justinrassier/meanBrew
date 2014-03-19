@@ -21,6 +21,7 @@ module.exports = function(config) {
       'public/vendor/toastr/toastr.js',
       'public/app/app.js',
       'public/app/**/*.js',
+      'test/seed.js',
       'test/tests/**/*.js'
     ],
 

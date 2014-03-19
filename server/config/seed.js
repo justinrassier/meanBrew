@@ -30,7 +30,7 @@ exports.seedUsers = function () {
         matt.save(function(err){});
 
 
-    })
+    });
 };
 function createUser(username, password, firstName, lastName, roles, recipes){
     var salt = encrypt.createSalt();

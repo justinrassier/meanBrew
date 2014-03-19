@@ -4,20 +4,21 @@ describe('mvRecipeCtrl', function(){
     //TODO: Place the mocked recipe collection global somewhere for other tests to use?
     describe('The Controller',function(){
         var scope,
-            ctrl,
-            recipes = [{name: "Justin's Stout", style: "American Stout", description: "A dark and awesome beer"}];
-        beforeEach(inject(function($window, $rootScope, $controller){
+            ctrl;
+        beforeEach(inject(function($rootScope, $controller, $httpBackend){
             //the mvRecipeCtrl uses the mvIdentity which gets its current user from the $window object
-            $window.bootstrappedUserObject = {firstName: "Justin", lastName: "Rassier", recipes: recipes};
             scope = $rootScope.$new();
             ctrl = $controller('mvRecipeCtrl', {$scope: scope});
+            $httpBackend.expectGET('/api/recipe').respond(seeder.recipes);
+            $httpBackend.flush();
         }));
-        it('Should exist', function(){
+
+        it('Should exist', inject(function($httpBackend){
             expect(ctrl).not.toBeNull();
-        });
+        }));
 
         it('Should Contain 1 Recipe', function(){
-            expect(scope.myRecipes.length).toBe(1);
+            expect(scope.myRecipes.length).toBeGreaterThan(0);
         });
 
     });

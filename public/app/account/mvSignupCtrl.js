@@ -13,6 +13,6 @@ angular.module('app').controller('mvSignupCtrl',function($scope, mvAuth, mvNotif
         }, function(reason){
             mvNotifier.error(reason);
         });
-    }
+    };
 
-})
+});

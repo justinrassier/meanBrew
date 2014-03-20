@@ -6,10 +6,10 @@ describe('mvRecipeDetailsCtrl', function(){
             ctrl,
             notifier;
 
-        beforeEach(inject(function($httpBackend, $rootScope, $controller, $routeParams, mvNotifier){
+        beforeEach(inject(function($httpBackend, $rootScope, $controller, $routeParams, mvNotifier, mvRecipe){
             //mock route params for resource query
             $routeParams._id = 1234;
-
+            
             notifier = mvNotifier;
             scope = $rootScope.$new();
             ctrl = $controller('mvRecipeDetailCtrl', {$scope: scope});
@@ -75,10 +75,13 @@ describe('mvRecipeDetailsCtrl', function(){
         });
 
         describe('on delete success', function(){
-            beforeEach(function(){
+            beforeEach(inject(function($httpBackend){
                 spyOn(notifier, 'notify');
+
+                $httpBackend.expectDELETE('/api/recipe/1234').respond(200);
                 scope.deleteRecipe();
-            });
+                $httpBackend.flush();
+            }));
 
             it('should redirect to the recipes main URL', inject(function($location){
                 expect($location.path()).toEqual('/recipe');
@@ -87,6 +90,21 @@ describe('mvRecipeDetailsCtrl', function(){
             it('should call mvNotifier with a message of "Recipe Deleted', function(){
                 expect(notifier.notify).toHaveBeenCalledWith('Recipe Deleted');
             });
+        });
+        
+        describe('on delete failure', function(){
+            beforeEach(inject(function($httpBackend){
+                
+                spyOn(notifier, 'error');
+                $httpBackend.expectDELETE('/api/recipe/1234').respond(400);
+                scope.deleteRecipe();
+                $httpBackend.flush();
+            }));
+            
+            it('should call the notifier with an error', function(){
+               expect(notifier.error).toHaveBeenCalled(); 
+            });
+            
         });
     });
 })

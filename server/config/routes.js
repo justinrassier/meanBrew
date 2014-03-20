@@ -18,6 +18,7 @@ module.exports = function(app){
     app.get('/api/recipe/:_id', recipes.getRecipeById);
     app.post('/api/recipe',  recipes.createRecipeForUser);
     app.put('/api/recipe', recipes.updateRecipe);
+    app.delete('/api/recipe/:_id', recipes.deleteRecipe);
 
     //render out jade partials
     app.get('/partials/*', function(req,res){

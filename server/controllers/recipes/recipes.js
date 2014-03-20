@@ -12,12 +12,18 @@ function findRecipeById(recipeId, callback){
             return callback(user.recipes[0]);
         }
     });
-};
+}
 function findUserByRecipeId(recipeId, callback){
     User.findOne({recipes: {$elemMatch: {_id: recipeId}}},function(err,user){
         callback(user);
     });
-};
+}
+
+function deleteRecipeById(recipeId, callback){
+    User.update({recipes: {$elemMatch:{_id: recipeId}}}, {$pull: {recipes: {_id: recipeId} }}, function(err, num){
+        callback(err);
+    });
+}
 
 
 exports.getAllRecipesForUser = function(req,res,next){
@@ -37,7 +43,7 @@ exports.getRecipeById = function(req,res,next){
         return res.send([recipe]);
     });
 
-}
+};
 
 exports.createRecipeForUser = function(req,res, next){
     var recipeData = req.body;
@@ -70,4 +76,13 @@ exports.updateRecipe = function(req,res,next){
 
     });
 
+};
+
+exports.deleteRecipe = function(req,res,next){
+    var recipeId = req.params._id;
+    deleteRecipeById(recipeId, function(err){
+        if(err){return res.send(400, err);}
+        return res.send(200);
+    });
+    console.log(recipeId);
 };

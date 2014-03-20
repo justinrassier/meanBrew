@@ -17,10 +17,15 @@ angular.module('app').controller('mvRecipeDetailCtrl', function($scope,mvRecipe,
     };
 
     $scope.deleteRecipe= function(){
-        mvNotifier.notify('Recipe Deleted');
+
+        $scope.recipe.$delete({_id: $scope.recipe._id}).then(function(){
+            mvNotifier.notify('Recipe Deleted');
+            $location.path('/recipe');
+        },function(reason){
+            mvNotifier.error(reason.data);
+        });
 
 
-        $location.path('/recipe');
     };
 
 });

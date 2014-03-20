@@ -9,10 +9,9 @@ angular.module('app').controller('mvCreateRecipeCtrl',function($scope,$location,
         var newRecipe = new mvRecipe(newRecipeData);
         newRecipe.$save().then(function(){
             mvNotifier.notify('Recipe created successfully!');
-            mvIdentity.currentUser.recipes.push(newRecipe);
             $location.path('/recipe');
         }, function(response){
-            console.log(response);
+            mvNotifier.error(response.data);
         });
     };
 });

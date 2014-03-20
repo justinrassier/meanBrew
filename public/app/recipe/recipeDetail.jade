@@ -17,6 +17,8 @@
                         textarea.form-control(rows="10" name="name", placeholder="Description", ng-model="recipe.description", required)
                 .form-group
                     .col-md-10.col-md-offset-2
+                        .pull-left
+                            button.btn.btn-danger(ng-click="deleteRecipe()") Delete
                         .pull-right
                             button.btn.btn-primary(ng-click="updateRecipe()", ng-disabled="createRecipeForm.$invalid") Update
                             | &nbsp;

@@ -7,13 +7,25 @@ angular.module('app').controller('mvRecipeDetailCtrl', function($scope,mvRecipe,
     });
     $scope.updateRecipe = function(){
         //the recipe comes back from the query above as a resource, so we can just call our update
-        $scope.recipe.$update({_id: $routeParams._id}).then(function(recipe){
+        $scope.recipe.$update().then(function(recipe){
             $scope.recipe = recipe;
             mvNotifier.notify('Recipe Updated');
             $location.path('/recipe');
         }, function(reason){
             mvNotifier.error(reason.data);
         });
+    };
+
+    $scope.deleteRecipe= function(){
+
+        $scope.recipe.$delete({_id: $scope.recipe._id}).then(function(){
+            mvNotifier.notify('Recipe Deleted');
+            $location.path('/recipe');
+        },function(reason){
+            mvNotifier.error(reason.data);
+        });
+
+
     };
 
 });

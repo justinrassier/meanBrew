@@ -2,8 +2,13 @@ extends ../includes/layout
 
 block main-content
     .navbar.navbar-inverse.navbar-fixed-top
-        .container
+        .container-fluid
             .navbar-header
+                button.navbar-toggle(data-toggle="collapse" data-target=".navbar-collapse")
+                    span.sr-only Toggle Navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
                 a.navbar-brand(href="/") MEAN Brew
             .navbar-collapse.collapse
                 ul.nav.navbar-nav
@@ -11,16 +16,9 @@ block main-content
                         a(href="/") MEAN Brew Home
                     li
                         a(href="/") Browse Recipes
-                    li.dropdown
-                        a.dropdown-toggle(href="", data-toggle="dropdown") Brew-day Tools
-                            b.caret
-                        ul.dropdown-menu
-                            li
-                                a(href="/") Strike Water/Temp Calculator
-                            li
-                                a(href="/") Boil-off Calculator
+                    
 
-                div(ng-include="'/partials/account/navbar-login'")
+                span(ng-include="'/partials/account/navbar-login'")
     section.content
         div(ng-view)
 

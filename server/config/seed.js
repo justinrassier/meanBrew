@@ -103,16 +103,22 @@ exports.seedStyles = function(){
 
             //after done parsing, clear out and insert into DB
             Style.find({}).exec(function(err, collection){
-              if(collection.length > 0){
-                  Style.remove({}, function(err){if(!err){console.log('styles cleared')}});
-              }
-              console.log('seeding styles');
-              for(var i = 0; i< styles.length; i++){
-                  styles[i].save(function(err){})
-              }
+                if(collection.length > 0){
+                  Style.remove({}, function(err){if(!err){
+                      console.log('styles cleared');
+                      insertStyles();
+                  }});
+                } 
+                else{insertStyles();}
             });
 
-
+            function insertStyles() {
+                console.log('seeding styles');
+                for (var i = 0; i < styles.length; i++) {
+                    styles[i].save(function (err) {
+                    })
+                }
+            }
         });
 
     });

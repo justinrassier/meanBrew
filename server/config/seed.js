@@ -6,11 +6,7 @@ var mongoose= require('mongoose'),
     fs =  require('fs'),
     xml2js = require('xml2js');
 
-var styles = [
-    new Style({categoryName: "Light Lager",
-    categoryNumber: "1",
-    subStyles: [{categoryName: "Lite American Lager"}]})
-];
+
 
 
 
@@ -55,7 +51,9 @@ exports.seedStyles = function(){
                 style.categoryName = category.name;
                 style.categoryNumber = category.$.id;
                 category.subcategory.forEach(function(subStyle){
-                    style.subStyles.push({categoryName: subStyle.name,
+
+
+                    var sub = {categoryName: subStyle.name,
                         categoryNumber: subStyle.$.id,
                         aroma: subStyle.aroma,
                         appearance: subStyle.appearance,
@@ -64,13 +62,35 @@ exports.seedStyles = function(){
                         impression: subStyle.impression,
                         comments: subStyle.comments,
                         ingredients: subStyle.ingredients,
-                        stats: {}
-
-                    });
+                        stats: [],
+                        examples: subStyle.examples
+                    };
+                    
+                    sub.stats.push(parseStat(subStyle.stats[0]));
+                    style.subStyles.push(subStyle.stats[0]);
+                    console.log(sub.stats[0].exceptions);
+                    function parseStat(stat){
+                        var result = {og: [], fg: [], abv: []};
+                        if(stat.og){
+                            result.og.push({low: stat.og[0].low[0], high: stat.og[0].high[0]});
+                        }
+                        if(stat.fg){
+                            result.fg.push({low: stat.fg[0].low[0], high: stat.og[0].high[0]});
+                        }
+                        if(stat.abv){
+                            result.abv.push({low: stat.abv[0].low[0], high: stat.abv[0].high[0]});
+                        }
+                        if(stat.exceptions){
+                            result.exceptions = stat.exceptions[0];
+                        }
+                        return result;
+                    }
+                    
                 });
                 styles.push(style);
             });
-            console.log(styles[0].subStyles[0]);
+            //var newStyle = new Style(styles[0]);
+            //console.log(styles[0].subStyles[0].stats);
 
         });
     });

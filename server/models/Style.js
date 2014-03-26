@@ -4,13 +4,14 @@ var mongoose = require('mongoose');
 
 var statSchema = mongoose.Schema({
     low: String,
-    high: String
+    high: String,
+    varies: Boolean
 });
 
 var statsSchema = mongoose.Schema({
-    og: String,
-    fg: String,
-    abv: String,
+    og: [statSchema],
+    fg: [statSchema],
+    abv: [statSchema],
     exceptions: String
 });
 
@@ -24,7 +25,8 @@ var subStyleSchema = mongoose.Schema({
     impression: String,
     comments: String,
     ingredients: String,
-    stats: []
+    stats: [statsSchema],
+    examples: String
 
 });
 

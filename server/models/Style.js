@@ -1,17 +1,19 @@
 var mongoose = require('mongoose');
 
-
+//NOTE: mongoose is strangely limited to subdocuments being required to be part of an array.
 
 var statSchema = mongoose.Schema({
     low: String,
     high: String,
-    varies: Boolean
+    flexible: Boolean
 });
 
 var statsSchema = mongoose.Schema({
     og: [statSchema],
     fg: [statSchema],
     abv: [statSchema],
+    srm: [statSchema],
+    ibu:[statSchema],
     exceptions: String
 });
 

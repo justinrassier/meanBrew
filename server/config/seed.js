@@ -38,73 +38,84 @@ exports.seedUsers = function () {
     });
 };
 
+function parseXML(data, callback){
+    var styles = [];
+    var parser = xml2js.Parser();
+    parser.parseString(data, function(err,result){
+        //category [0] is beer
+        //foreach is blocking so we can program this part linear
+        result.styleguide.class[0].category.forEach(function(category){
+            var style = new Style();
+            style.categoryName = category.name;
+            style.categoryNumber = category.$.id;
+            category.subcategory.forEach(function(subStyle){
+
+                var sub = {categoryName: subStyle.name,
+                    categoryNumber: subStyle.$.id,
+                    aroma: subStyle.aroma,
+                    appearance: subStyle.appearance,
+                    flavor: subStyle.flavor,
+                    mouthfeel: subStyle.mouthfeel,
+                    impression: subStyle.impression,
+                    comments: subStyle.comments,
+                    ingredients: subStyle.ingredients,
+                    stats: [],
+                    examples: subStyle.examples
+                };
+
+                sub.stats.push(parseStat(subStyle.stats[0]));
+                style.subStyles.push(sub);
+
+                //helper to parse the stats array
+                function parseStat(stat){
+                    var result = {og: [], fg: [], abv: [], ibu:[], srm: []};
+                    if(stat.og){
+                        result.og.push({flexible: stat.og[0].$.flexible, low: stat.og[0].low[0], high: stat.og[0].high[0]});
+                    }
+                    if(stat.fg){
+                        result.fg.push({flexible: stat.fg[0].$.flexible,low: stat.fg[0].low[0], high: stat.og[0].high[0]});
+                    }
+                    if(stat.abv){
+                        result.abv.push({flexible: stat.abv[0].$.flexible, low: stat.abv[0].low[0], high: stat.abv[0].high[0]});
+                    }
+                    if(stat.ibu){
+                        result.ibu.push({flexible: stat.ibu[0].$.flexible, low: stat.ibu[0].low[0], high: stat.ibu[0].high[0]});
+                    }
+                    if(stat.srm){
+                        result.srm.push({flexible: stat.srm[0].$.flexible, low: stat.srm[0].low[0], high: stat.srm[0].high[0]});
+                    }
+                    if(stat.exceptions){
+                        result.exceptions = stat.exceptions[0];
+                    }
+                    return result;
+                }
+            });
+            styles.push(style);
+        });
+
+        callback(styles);
+    });
+}
 
 exports.seedStyles = function(){
-    parser = xml2js.Parser();
-    var styles = [];
     fs.readFile(__dirname+'/styleguide2008.xml', function(err, data){
-        parser.parseString(data, function(err,result){
+        var styles = parseXML(data, function(styles){
 
-            //category [0] is beer
-            result.styleguide.class[0].category.forEach(function(category){
-                var style = new Style();
-                style.categoryName = category.name;
-                style.categoryNumber = category.$.id;
-                category.subcategory.forEach(function(subStyle){
-
-
-                    var sub = {categoryName: subStyle.name,
-                        categoryNumber: subStyle.$.id,
-                        aroma: subStyle.aroma,
-                        appearance: subStyle.appearance,
-                        flavor: subStyle.flavor,
-                        mouthfeel: subStyle.mouthfeel,
-                        impression: subStyle.impression,
-                        comments: subStyle.comments,
-                        ingredients: subStyle.ingredients,
-                        stats: [],
-                        examples: subStyle.examples
-                    };
-                    
-                    sub.stats.push(parseStat(subStyle.stats[0]));
-                    style.subStyles.push(subStyle.stats[0]);
-                    console.log(sub.stats[0].exceptions);
-                    function parseStat(stat){
-                        var result = {og: [], fg: [], abv: []};
-                        if(stat.og){
-                            result.og.push({low: stat.og[0].low[0], high: stat.og[0].high[0]});
-                        }
-                        if(stat.fg){
-                            result.fg.push({low: stat.fg[0].low[0], high: stat.og[0].high[0]});
-                        }
-                        if(stat.abv){
-                            result.abv.push({low: stat.abv[0].low[0], high: stat.abv[0].high[0]});
-                        }
-                        if(stat.exceptions){
-                            result.exceptions = stat.exceptions[0];
-                        }
-                        return result;
-                    }
-                    
-                });
-                styles.push(style);
+            //after done parsing, clear out and insert into DB
+            Style.find({}).exec(function(err, collection){
+              if(collection.length > 0){
+                  Style.remove({}, function(err){if(!err){console.log('styles cleared')}});
+              }
+              console.log('seeding styles');
+              for(var i = 0; i< styles.length; i++){
+                  styles[i].save(function(err){})
+              }
             });
-            //var newStyle = new Style(styles[0]);
-            //console.log(styles[0].subStyles[0].stats);
+
 
         });
-    });
 
-//  Style.find({}).exec(function(err, collection){
-//      if(collection.length > 0){
-//          Style.remove({}, function(err){if(!err){console.log('styles cleared')}});
-//      }
-//      console.log('seeding styles');
-//
-//      for(var i = 0; i< styles.length; i++){
-//          styles[i].save(function(err){})
-//      }
-//  });
+    });
 };
 
 function createUser(username, password, firstName, lastName, roles, recipes){

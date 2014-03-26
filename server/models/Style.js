@@ -1,5 +1,19 @@
 var mongoose = require('mongoose');
 
+
+
+var statSchema = mongoose.Schema({
+    low: String,
+    high: String
+});
+
+var statsSchema = mongoose.Schema({
+    og: String,
+    fg: String,
+    abv: String,
+    exceptions: String
+});
+
 var subStyleSchema = mongoose.Schema({
     categoryName: String,
     categoryNumber: String,
@@ -7,19 +21,11 @@ var subStyleSchema = mongoose.Schema({
     appearance: String,
     flavor: String,
     mouthfeel: String,
-    overallImpression: String,
+    impression: String,
     comments: String,
     ingredients: String,
-    ibuMin: Number,
-    ibuMax: Number,
-    srmMin: Number,
-    srmMax: Number,
-    ogMin: Number,
-    ogMax: Number,
-    fgMin: Number,
-    fgMax: Number,
-    abvMin: Number,
-    abvMax: Number
+    stats: []
+
 });
 
 

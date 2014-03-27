@@ -1,5 +1,10 @@
-angular.module('app').controller('mvCreateRecipeCtrl',function($scope,$location, mvRecipe, mvIdentity, mvNotifier){
+angular.module('app').controller('mvCreateRecipeCtrl',function($scope,$location, mvRecipe, mvIdentity, mvNotifier, mvStyle){
+
+    mvStyle.query().$promise.then(function(styles){
+        $scope.styles = styles;
+    });
     $scope.createRecipe = function(){
+
         var newRecipeData =
         {
             name : $scope.name,

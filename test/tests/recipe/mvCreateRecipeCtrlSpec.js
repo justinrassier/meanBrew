@@ -10,10 +10,14 @@ describe('mvCreateRecipeCtrl', function(){
              notifier = mvNotifier;
              scope = $rootScope.$new();
              ctrl = $controller('mvCreateRecipeCtrl', {$scope: scope});
+
+            //every init will get the styles
+            $httpBackend.expectGET('/api/style').respond([{categoryName:'Stout'}]);
+            $httpBackend.flush();
         }));
             
         describe('on initialize', function(){
-                
+
             it('Should exist', function($rootScope, $controller){
                  expect(ctrl).not.toBeNull($controller);
                  expect(ctrl).toBeDefined();
@@ -21,6 +25,12 @@ describe('mvCreateRecipeCtrl', function(){
             
             it('the scope should contain a function called createRecipe()', function(){
                 expect(scope.createRecipe).toBeDefined();
+            });
+
+            it('should retrieve styles from the Style resource and attach it to the scope', function(){
+                console.log(scope.styles);
+                expect(scope.styles).toBeDefined();
+                expect(scope.styles[0].categoryName).toEqual('Stout');
             });
         
         });

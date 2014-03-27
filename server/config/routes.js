@@ -1,6 +1,7 @@
 var auth = require('./auth'),
     users = require('../controllers/users/users'),
     recipes=  require('../controllers/recipes/recipes'),
+    styles = require('../controllers/styles/styles'),
     mongoose = require('mongoose'),
     User = mongoose.model('User'),
     UserViewModel = require('../viewModels/UserViewModel').UserViewModel;
@@ -19,6 +20,10 @@ module.exports = function(app){
     app.post('/api/recipe',  recipes.createRecipeForUser);
     app.put('/api/recipe', recipes.updateRecipe);
     app.delete('/api/recipe/:_id', recipes.deleteRecipe);
+
+
+    //Style API
+    app.get('/api/style', styles.getAllStyles)
 
     //render out jade partials
     app.get('/partials/*', function(req,res){

@@ -1,6 +1,9 @@
 angular.module('app').controller('mvCreateRecipeCtrl',function($scope,$location, mvRecipe, mvIdentity, mvNotifier, mvStyle){
+    $scope.selectedStyle;
+
 
     mvStyle.query().$promise.then(function(styles){
+        console.log(styles);
         $scope.styles = styles;
     });
     $scope.createRecipe = function(){
@@ -8,7 +11,7 @@ angular.module('app').controller('mvCreateRecipeCtrl',function($scope,$location,
         var newRecipeData =
         {
             name : $scope.name,
-            style: $scope.style,
+            style: $scope.selectedStyle.categoryName,
             description: $scope.description
         };
         var newRecipe = new mvRecipe(newRecipeData);

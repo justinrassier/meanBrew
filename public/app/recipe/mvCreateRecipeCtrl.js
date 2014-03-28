@@ -3,13 +3,16 @@ angular.module('app').controller('mvCreateRecipeCtrl',function($scope,$location,
 
 
     mvStyle.query().$promise.then(function(styles){
-        console.log(styles);
+
         $scope.styles =  _.flatten(_.map(styles,function(style){
             return _.map(style.subStyles,function(sub){
-                return {categoryName: style.categoryName, subCategoryName: sub.categoryName};
+                return {categoryName: style.categoryName,
+                    subCategoryName: sub.categoryName,
+                    subCategoryNumber: sub.categoryNumber,
+                    subCategoryId: sub._id};
             })
         }),true);
-
+        console.log($scope.styles);
     });
     $scope.createRecipe = function(){
 

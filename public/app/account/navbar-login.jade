@@ -11,6 +11,8 @@
     ul.nav.navbar.nav.navbar-right(ng-show="identity.isAuthenticated()")
         li.dropdown
             a.dropdown-toggle(href="", data-toggle="dropdown")
+                img(ng-src="{{identity.currentUser.gravatarUrl}}")
+                | &nbsp;
                 | {{identity.currentUser.firstName + " " + identity.currentUser.lastName}}
                 b.caret
             ul.dropdown-menu

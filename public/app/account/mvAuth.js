@@ -1,5 +1,5 @@
 //auth service to pull logic out of controller
-angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
+angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser, gravatarService){
    return {
        authenticateUser : function(username, password){
            var dfd = $q.defer();
@@ -8,6 +8,7 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
                    //user response to create user resource
                    var user = new mvUser();
                    angular.extend(user, response.data.user);
+                   user.gravatarUrl = gravatarService.getGravatarUrl(user.username);
                    mvIdentity.currentUser = user;
                    dfd.resolve(true);
                }

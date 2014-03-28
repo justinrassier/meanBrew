@@ -12,8 +12,10 @@ describe('mvCreateRecipeCtrl', function(){
              ctrl = $controller('mvCreateRecipeCtrl', {$scope: scope});
 
             //every init will get the styles
-            $httpBackend.expectGET('/api/style').respond([{categoryName:'Stout'}]);
+            $httpBackend.expectGET('/api/style').respond(seeder.styles);
             $httpBackend.flush();
+
+            scope.selectedStyle = scope.styles[0];
         }));
             
         describe('on initialize', function(){
@@ -30,7 +32,7 @@ describe('mvCreateRecipeCtrl', function(){
             it('should retrieve styles from the Style resource and attach it to the scope', function(){
                 console.log(scope.styles);
                 expect(scope.styles).toBeDefined();
-                expect(scope.styles[0].categoryName).toEqual('Stout');
+                expect(scope.styles[0].categoryName).toEqual('Light Lager');
             });
         
         });

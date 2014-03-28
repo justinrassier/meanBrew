@@ -1,11 +1,8 @@
 angular.module('app').controller('mvCreateRecipeCtrl',function($scope,$location, mvRecipe, mvIdentity, mvNotifier, mvStyle, styleHelpers){
     $scope.selectedStyle;
 
-
     mvStyle.query().$promise.then(function(styles){
-
         $scope.styles = styleHelpers.flattenStylesForSelectList(styles);
-        console.log($scope.styles);
     });
     $scope.createRecipe = function(){
 

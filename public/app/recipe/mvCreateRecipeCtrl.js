@@ -4,14 +4,19 @@ angular.module('app').controller('mvCreateRecipeCtrl',function($scope,$location,
 
     mvStyle.query().$promise.then(function(styles){
         console.log(styles);
-        $scope.styles = styles;
+        $scope.styles =  _.flatten(_.map(styles,function(style){
+            return _.map(style.subStyles,function(sub){
+                return {categoryName: style.categoryName, subCategoryName: sub.categoryName};
+            })
+        }),true);
+
     });
     $scope.createRecipe = function(){
 
         var newRecipeData =
         {
             name : $scope.name,
-            style: $scope.selectedStyle.categoryName,
+            style: $scope.selectedStyle.subCategoryName,
             description: $scope.description
         };
         var newRecipe = new mvRecipe(newRecipeData);

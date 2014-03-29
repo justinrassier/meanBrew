@@ -21,5 +21,11 @@ block main-content
                 span(ng-include="'/partials/account/navbar-login'")
     section.content
         div(ng-view)
-
-    footer.container.text-center
+    div#footerpush
+    
+block footer
+    footer
+      .container.text-center 
+          .nav.footer-nav
+              a(href="https://github.com/justinrassier/meanBrew") MEAN Brew on GitHub
+            

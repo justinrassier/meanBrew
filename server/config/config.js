@@ -18,7 +18,7 @@ module.exports = {
     cloud9: {
         rootPath: rootPath,
         db: 'mongodb://justinrassier:V4LknrMGaipw7Ba@ds033059.mongolab.com:33059/basicmean',
-        port: process.env.PORT
+        port: process.env.PORT || 3030
     }
 
 }

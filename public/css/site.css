@@ -10,7 +10,11 @@ body {
   margin-bottom: -20px;
 }
 .navbar-header a.navbar-brand h6 {
-  color: #ccc;
+  color: #a0a000;
+}
+.navbar-brand img {
+  height: 72px;
+  margin: 0.3em 0.3em 0.3em 1.75em;
 }
 #wrapper {
   min-height: 100%;

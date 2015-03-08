@@ -1,7 +1,7 @@
 {
-  "name": "PluralsightMean",
+  "name": "MeanBrew",
   "version": "0.0.0",
-  "description": "Kegbot",
+  "description": "MeanBrew",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "npm": "1.2.x"
   },
   "repository": "",
-  "author": "Justin Rassier",
+  "author": "Justin Rassier, Matt Richards",
   "license": "BSD",
   "dependencies": {
     "jade": "~1.1.5",

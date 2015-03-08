@@ -6,7 +6,7 @@ module.exports = {
     development: {
         rootPath: rootPath,
         db: 'mongodb://localhost/meanBrew',
-        port: process.env.PORT || 3030
+        port: process.env.PORT || 8080
 
     },
     production: {

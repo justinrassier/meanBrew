@@ -14,12 +14,12 @@
   "author": "Justin Rassier, Matt Richards",
   "license": "BSD",
   "dependencies": {
-    "jade": "~1.1.5",
-    "express": "~3.4.8",
-    "stylus": "~0.42.2",
-    "mongoose": "~3.8.7",
+    "express": "^3.20.1",
+    "jade": "^1.9.2",
+    "mongoose": "^3.9.7",
     "passport": "~0.2.0",
-    "passport-local": "~0.1.6",
+    "passport-local": "^0.1.6",
+    "stylus": "^0.42.3",
     "xml2js": "~0.4.1"
   },
   "devDependencies": {

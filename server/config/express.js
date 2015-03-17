@@ -38,7 +38,6 @@ module.exports = function (app, config) {
         ));
   */
         //use SASS middleware instead of stylus
-        console.log(__dirname + "is your dir name");
         app.use(sassMiddleware({
             src: config.rootPath + '/public',
             dest: config.rootPath + '/public',

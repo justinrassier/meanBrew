@@ -1,6 +1,8 @@
 var express = require('express'),
     stylus = require('stylus'),
-    passport = require('passport');
+    passport = require('passport'),
+    sassMiddleware = require('node-sass-middleware');
+    
 
 module.exports = function (app, config) {
 //setup stylus compiler
@@ -26,7 +28,7 @@ module.exports = function (app, config) {
         //tell passport to use sessions
         app.use(passport.session());
 
-
+/*
         //setup stylus compiler for CSS
         app.use(stylus.middleware(
             {
@@ -34,6 +36,16 @@ module.exports = function (app, config) {
                 compile: compile
             }
         ));
+  */
+        //use SASS middleware instead of stylus
+        console.log(__dirname + "is your dir name");
+        app.use(sassMiddleware({
+            src: config.rootPath + '/public',
+            dest: config.rootPath + '/public',
+            debug: true,
+            outputStyle: 'compressed',
+            prefix:  '/prefix'
+        }));
 
         //setup static route to the public folder for static content
         app.use(express.static(config.rootPath + '/public'));

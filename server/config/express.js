@@ -1,12 +1,9 @@
 var express = require('express'),
-    stylus = require('stylus'),
-    passport = require('passport');
+    passport = require('passport'),
+    sassMiddleware = require('node-sass-middleware');
+    
 
 module.exports = function (app, config) {
-//setup stylus compiler
-    function compile(str, path) {
-        return stylus(str).set('filename', path);
-    }
 
     app.configure(function () {
         //set the server views folder. I believe call to render will automatically point here
@@ -27,13 +24,14 @@ module.exports = function (app, config) {
         app.use(passport.session());
 
 
-        //setup stylus compiler for CSS
-        app.use(stylus.middleware(
-            {
-                src: config.rootPath + '/public',
-                compile: compile
-            }
-        ));
+        //use SASS middleware instead of stylus
+        app.use(sassMiddleware({
+            src: config.rootPath + '/public',
+            dest: config.rootPath + '/public',
+            debug: true,
+            outputStyle: 'compressed',
+            prefix:  '/prefix'
+        }));
 
         //setup static route to the public folder for static content
         app.use(express.static(config.rootPath + '/public'));

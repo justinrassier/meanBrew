@@ -35,7 +35,7 @@ var subStyleSchema = mongoose.Schema({
 
 var styleSchema = mongoose.Schema({
     categoryName : String,
-    categoryNumber: String,
+    categoryNumber: Number,
     subStyles: [subStyleSchema]
 });
 

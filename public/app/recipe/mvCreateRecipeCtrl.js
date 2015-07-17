@@ -1,9 +1,15 @@
-angular.module('app').controller('mvCreateRecipeCtrl',function($scope,$location, mvRecipe, mvIdentity, mvNotifier){
+angular.module('app').controller('mvCreateRecipeCtrl',function($scope,$location, mvRecipe, mvIdentity, mvNotifier, mvStyle, styleHelpers){
+    $scope.selectedStyle;
+
+    mvStyle.query().$promise.then(function(styles){
+        $scope.styles = styleHelpers.flattenStylesForSelectList(styles);
+    });
     $scope.createRecipe = function(){
+
         var newRecipeData =
         {
             name : $scope.name,
-            style: $scope.style,
+            style: $scope.selectedStyle.subCategoryName,
             description: $scope.description
         };
         var newRecipe = new mvRecipe(newRecipeData);

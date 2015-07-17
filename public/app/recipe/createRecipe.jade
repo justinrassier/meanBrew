@@ -10,7 +10,7 @@
                 .form-group
                     label.col-md-2.control-label(for="style") Style
                     .col-md-10
-                        input.form-control(name="style", type="text", placeholder="Style", ng-model="style", required)
+                        select.form-control(name="style", placeholder="Style", ng-model="selectedStyle", ng-options="s.subCategoryName group by s.categoryName for s in styles" required)
                 .form-group
                     label.col-md-2.control-label(for="name") Name
                     .col-md-10
